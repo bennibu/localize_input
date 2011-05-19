@@ -1,0 +1,18 @@
+LocalizeInput
+=============
+
+This plugin extends ActiveRecord and replaces the seperator of numbers in non us languages, .e.g german.
+It uses the seperator, which comes with the I18n module. So the seperator has to be defined in the appropriate
+yaml file.
+
+
+Example
+=======
+
+class Article < ActiveRecord::Base
+    # Replace seperator for attribute price to allow input with commata
+    localize_input_of :price
+end
+
+
+Copyright (c) 2011 bennibu, released under the MIT license
