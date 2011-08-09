@@ -10,7 +10,15 @@ module LocalizeInput
     def localize_input_of(*attr_names)
       attr_names.flatten.each do |attr|
         define_method "#{attr}=" do |input|
-          self[attr] = input.to_s.gsub(I18n.t("separator", :scope => "number.format"), ".") rescue input
+          begin
+            seperator = I18n.t("separator", :scope => "number.format")
+            delimiter = I18n.t("delimiter", :scope => "number.format")
+            input.gsub!(delimiter, "") if input.match(/\d+#{Regexp.escape(delimiter)}+\d+#{Regexp.escape(seperator)}+\d+/) # Remove delimiter
+            input.gsub!(seperator, ".") # Replace seperator with db compatible character
+            self[attr] = input
+          rescue
+            self[attr] = input
+          end
         end
       end
     end
