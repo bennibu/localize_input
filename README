@@ -15,4 +15,4 @@ class Article < ActiveRecord::Base
 end
 
 
-Copyright (c) 2011 bennibu, released under the MIT license
+Copyright (c) 2012 bennibu, released under the MIT license
